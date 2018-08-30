@@ -1,0 +1,1 @@
+include ':app', ':kaac',':kaac-compiler', ':kaac-annotation',':kaac-aspect'
