@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
+apply plugin: 'com.github.dcendents.android-maven'
+group='keatsyh@gmail.com'
 
 android {
     compileSdkVersion 28
@@ -36,6 +38,7 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     api 'org.aspectj:aspectjrt:1.8.9'
     implementation project(':kaac-annotation')
+
 }
 repositories {
     mavenCentral()
