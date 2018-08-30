@@ -23,6 +23,7 @@ android {
 }
 
 dependencies {
+    implementation 'com.github.keatsyh:Kaac:0.1'
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
