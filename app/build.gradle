@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android'
 
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'android-aspectjx'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -24,10 +26,10 @@ android {
 
 dependencies {
 //    implementation 'com.github.keatsyh:Kaac:0.1.1'
-    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.1'
-    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.1'
-    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.1'
-    implementation 'com.github.keatsyh.Kaac:kaac:0.1.1'
+    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.2'
+    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.2'
+    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.2'
+    implementation 'com.github.keatsyh.Kaac:kaac:0.1.2'
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
