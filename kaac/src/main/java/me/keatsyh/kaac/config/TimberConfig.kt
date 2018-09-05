@@ -1,5 +1,6 @@
 package me.keatsyh.kaac.config
 
+import android.util.Log
 import me.keatsyh.kaac.BuildConfig
 import timber.log.Timber
 
@@ -8,9 +9,12 @@ class TimberConfig {
 
     companion object {
         fun init():TimberConfig {
+            Log.d("TimberConfig","init")
             if (BuildConfig.DEBUG) {
+                Log.d("TimberConfig","VarTree")
                 Timber.plant(VarTree())
             } else {
+                Log.d("TimberConfig","CrashTree")
                 Timber.plant(CrashTree())
             }
             return TimberConfig()
@@ -22,6 +26,7 @@ class TimberConfig {
 class CrashTree: Timber.Tree() {
     override fun log(priority: Int, tag: String?, message: String, t: Throwable?) {
         super.log(priority, tag, message, t)
+        Log.d("TimberConfig","CrashTreeLog")
     }
 }
 
@@ -34,6 +39,8 @@ class VarTree: Timber.DebugTree() {
         }
 
         super.log(priority, tag, message, t)
+
+        Log.d("TimberConfig","VarTreeLog")
     }
 
 
