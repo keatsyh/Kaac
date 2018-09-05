@@ -38,11 +38,13 @@ class MainActivity: KActivity() {
     @PermissionProhibit()
     fun prohibit(prohibitBean: ProhibitBean) {
         Timber.d("MainActivity:  prohibit  $prohibitBean")
-        val builder = AlertDialog.Builder(this)
-        builder.setMessage("使用该功能需要使用SD卡权限\n是否再次开启权限")
-        builder.setPositiveButton("是") { dialog, which -> toSetting() }
-        builder.setNegativeButton("否", null)
-        builder.setCancelable(true)
-        builder.show()
+//        val builder = AlertDialog.Builder(this)
+//        builder.setMessage("使用该功能需要使用SD卡权限\n是否再次开启权限")
+//        builder.setPositiveButton("是") { dialog, which -> toSetting() }
+//        builder.setNegativeButton("否", null)
+//        builder.setCancelable(true)
+//        builder.show()
+
+
     }
 }
