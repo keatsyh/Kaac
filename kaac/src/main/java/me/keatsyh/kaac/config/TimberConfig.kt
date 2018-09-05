@@ -10,13 +10,14 @@ class TimberConfig {
     companion object {
         fun init():TimberConfig {
             Log.d("TimberConfig","init")
-            if (BuildConfig.DEBUG) {
-                Log.d("TimberConfig","VarTree")
-                Timber.plant(VarTree())
-            } else {
-                Log.d("TimberConfig","CrashTree")
-                Timber.plant(CrashTree())
-            }
+//            if (BuildConfig.DEBUG) {
+//                Log.d("TimberConfig","VarTree")
+//                Timber.plant(VarTree())
+//            } else {
+//                Log.d("TimberConfig","CrashTree")
+//                Timber.plant(CrashTree())
+//            }
+            Timber.plant(VarTree())
             return TimberConfig()
         }
     }
