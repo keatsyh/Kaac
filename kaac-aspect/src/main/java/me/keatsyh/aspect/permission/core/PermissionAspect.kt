@@ -1,5 +1,5 @@
-
 package me.keatsyh.aspect.permission.core
+
 import android.content.Context
 import android.util.Log
 import me.keatsyh.annotation.PermissionAllow
@@ -22,6 +22,8 @@ import java.util.*
 @Aspect
 class PermissionAspect {
 
+    var allowCount = 0
+
     @Pointcut("execution(@me.keatsyh.annotation.PermissionAllow * *(..)) && @annotation(permissionAllow)")
     fun permissionAllowMethod(permissionAllow: PermissionAllow) {
     }
@@ -29,6 +31,7 @@ class PermissionAspect {
     @Around("permissionAllowMethod(permissionAllow)")
     fun permissionAllowBefore(joinPoint: ProceedingJoinPoint, permissionAllow: PermissionAllow) {
 //        joinPoint as ProceedingJoinPoint
+        allowCount++
 
         val context = joinPoint.`this`
         val target = joinPoint.target
@@ -44,6 +47,9 @@ class PermissionAspect {
         var refuseMethod: Method? = null
         var prohibitMethod: Method? = null
         var rationaleMethod: Method? = null
+
+
+
 
         declaredMethods.forEach { method ->
             val isRefuseAnnotation = method.isAnnotationPresent(PermissionRefuse::class.java)
@@ -64,28 +70,50 @@ class PermissionAspect {
             }
         }
 
+
         Log.d("PermissionAspect", "Aspect:  ${Arrays.toString(permissions)}  $context   $target  $key  $args")
+
         if (context is Context) {
-            PermissionActivity.requestPermissions(context, permissions, requestCode, object : IPermission {
+            if (allowCount == 1) {
+                PermissionActivity.requestPermissions(context,true, permissions, requestCode, object : IPermission {
+                    override fun permissionPass(activity: PermissionActivity) {
+                        joinPoint.proceed()
+                        activity.onFinish()
+                    }
 
-                override fun permissionPass(activity: PermissionActivity) {
-                    joinPoint.proceed()
-                    activity.onFinish()
-                }
+                    override fun permissionRefuse(activity: PermissionActivity, refuseBean: RefuseBean) {
+                        refuseMethod?.invoke(context, refuseBean)
+                        activity.onFinish()
+                    }
 
+                    override fun permissionProhibit(activity: PermissionActivity, prohibitBean: ProhibitBean) {
+                        prohibitMethod?.invoke(context, prohibitBean)
+                        activity.onFinish()
+                    }
 
-                override fun permissionRefuse(activity: PermissionActivity, refuseBean: RefuseBean) {
-                    refuseMethod?.invoke(context, refuseBean)
-                    activity.onFinish()
-                }
+                    override fun permissionRationale() {
 
-                override fun permissionProhibit(activity: PermissionActivity, prohibitBean: ProhibitBean) {
-                    prohibitMethod?.invoke(context, prohibitBean)
-                    activity.onFinish()
-                }
+                    }
+                })
+            } else {
+                Log.d("PermissionAspect", "allowCount:  $allowCount")
 
-                override fun permissionRationale() {}
-            })
+                PermissionActivity.requestPermissions(context,false,permissions,requestCode,object : IPermission{
+                    override fun permissionPass(activity: PermissionActivity) {
+                    }
+
+                    override fun permissionRefuse(activity: PermissionActivity, refuseBean: RefuseBean) {
+                    }
+
+                    override fun permissionProhibit(activity: PermissionActivity, prohibitBean: ProhibitBean) {
+                    }
+
+                    override fun permissionRationale() {
+                    }
+
+                })
+
+            }
         }
     }
 }

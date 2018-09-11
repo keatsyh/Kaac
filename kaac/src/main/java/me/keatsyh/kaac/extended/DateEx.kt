@@ -101,6 +101,23 @@ fun dateInDateRang(currentDate: Date, beginDate: Date, endDate: Date): Boolean {
     return false
 }
 
+fun dateInDateRang(currentDate: Long, beginDate: Long, endDate: Long): Boolean {
+    if (beginDate < currentDate && endDate > currentDate) {
+        return true
+    }
+    return false
+}
+
+fun getDateLong(timeStr: String, format: String = "HH:mm"): Long {
+    val format = SimpleDateFormat(format,Locale.getDefault())
+    return format.parse(timeStr).time
+}
+
+fun getCurrentTime(format: String = "HH:mm"): String {
+    val format = SimpleDateFormat(format,Locale.getDefault())
+    return format.format(Date())
+}
+
 
 // 判断两个日期大小  如，第一个日期大于第二个日期，返回true  反之false
 fun isDateOneBigger(dateStr1: String, dateStr2: String, format: String = "yyyy/MM/dd"): Boolean {

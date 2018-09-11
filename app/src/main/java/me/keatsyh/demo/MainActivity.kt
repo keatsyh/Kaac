@@ -1,32 +1,36 @@
 package me.keatsyh.demo
 
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.Manifest.permission.*
 import android.support.v7.app.AlertDialog
 import me.keatsyh.annotation.PermissionAllow
 import me.keatsyh.annotation.PermissionProhibit
 import me.keatsyh.annotation.PermissionRefuse
 import me.keatsyh.aspect.permission.bean.ProhibitBean
 import me.keatsyh.aspect.permission.bean.RefuseBean
-import me.keatsyh.kaac.extended.toSetting
 import me.keatsyh.kaac.layout.KActivity
 import timber.log.Timber
 import toast
 
-class MainActivity: KActivity() {
+class MainActivity : KActivity() {
 
     override fun asbLayoutId() = R.layout.activity_main
 
     override fun createViewModel() {
         writeData("123")
+        callPhone()
     }
 
 
-    @PermissionAllow(value = [WRITE_EXTERNAL_STORAGE, CAMERA], requestCode = 0)
+    @PermissionAllow(value = [WRITE_EXTERNAL_STORAGE, CAMERA], requestCode = 2)
     fun writeData(string: String) {
         toast("PermissionAllow")
         Timber.d("MainActivity:  writeData  $string")
+    }
 
+
+    @PermissionAllow(value = [CALL_PHONE, SEND_SMS], requestCode = 1)
+    fun callPhone() {
+        Timber.d("MainActivity:  callPhone")
     }
 
 

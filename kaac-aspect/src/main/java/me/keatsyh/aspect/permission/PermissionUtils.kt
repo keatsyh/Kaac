@@ -36,10 +36,12 @@ fun verifyPermissions(vararg grantResults: Int): Boolean {
     return true
 }
 
+
 fun Context.hasPermission(vararg permissions: String): Boolean {
     if (permissions.isEmpty()) {
         return false
     }
+
     for (permission in permissions) {
         if (permissionExits(permission) && !hasPermission(permission)) {
             return false
