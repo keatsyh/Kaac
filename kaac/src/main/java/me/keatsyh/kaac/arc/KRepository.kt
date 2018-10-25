@@ -3,7 +3,6 @@ package me.keatsyh.kaac.arc
 import android.arch.persistence.room.RoomDatabase
 import me.keatsyh.kaac.KApp
 import me.keatsyh.kaac.extended.getApp
-import me.keatsyh.kaac.extended.getKaac
 
 
 open class KRepository<A : Any> {

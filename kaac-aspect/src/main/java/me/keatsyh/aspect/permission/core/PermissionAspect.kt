@@ -50,7 +50,6 @@ class PermissionAspect {
 
 
 
-
         declaredMethods.forEach { method ->
             val isRefuseAnnotation = method.isAnnotationPresent(PermissionRefuse::class.java)
             val isProhibitAnnotation = method.isAnnotationPresent(PermissionProhibit::class.java)
@@ -75,7 +74,7 @@ class PermissionAspect {
 
         if (context is Context) {
             if (allowCount == 1) {
-                PermissionActivity.requestPermissions(context,true, permissions, requestCode, object : IPermission {
+                PermissionActivity.requestPermissions(context, true, permissions, requestCode, object : IPermission {
                     override fun permissionPass(activity: PermissionActivity) {
                         joinPoint.proceed()
                         activity.onFinish()
@@ -98,17 +97,21 @@ class PermissionAspect {
             } else {
                 Log.d("PermissionAspect", "allowCount:  $allowCount")
 
-                PermissionActivity.requestPermissions(context,false,permissions,requestCode,object : IPermission{
+                PermissionActivity.requestPermissions(context, false, permissions, requestCode, object : IPermission {
                     override fun permissionPass(activity: PermissionActivity) {
+
                     }
 
                     override fun permissionRefuse(activity: PermissionActivity, refuseBean: RefuseBean) {
+
                     }
 
                     override fun permissionProhibit(activity: PermissionActivity, prohibitBean: ProhibitBean) {
+
                     }
 
                     override fun permissionRationale() {
+
                     }
 
                 })

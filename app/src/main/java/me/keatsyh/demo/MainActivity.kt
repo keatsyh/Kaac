@@ -1,7 +1,7 @@
 package me.keatsyh.demo
 
-import android.Manifest.permission.*
-import android.support.v7.app.AlertDialog
+import android.Manifest
+
 import me.keatsyh.annotation.PermissionAllow
 import me.keatsyh.annotation.PermissionProhibit
 import me.keatsyh.annotation.PermissionRefuse
@@ -17,21 +17,27 @@ class MainActivity : KActivity() {
 
     override fun createViewModel() {
         writeData("123")
-        callPhone()
+//        callPhone()
     }
 
 
-    @PermissionAllow(value = [WRITE_EXTERNAL_STORAGE, CAMERA], requestCode = 2)
+    @PermissionAllow(value = [Manifest.permission.ACCESS_NETWORK_STATE,
+        Manifest.permission.ACCESS_WIFI_STATE,
+        Manifest.permission.CHANGE_NETWORK_STATE,
+        Manifest.permission.READ_PHONE_STATE,
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.READ_EXTERNAL_STORAGE,
+        Manifest.permission.ACCESS_FINE_LOCATION], requestCode = 2)
     fun writeData(string: String) {
         toast("PermissionAllow")
         Timber.d("MainActivity:  writeData  $string")
     }
 
 
-    @PermissionAllow(value = [CALL_PHONE, SEND_SMS], requestCode = 1)
-    fun callPhone() {
-        Timber.d("MainActivity:  callPhone")
-    }
+//    @PermissionAllow(value = [SEND_SMS, CALL_PHONE], requestCode = 1)
+//    fun callPhone() {
+//        Timber.d("MainActivity:  callPhone")
+//    }
 
 
     @PermissionRefuse()

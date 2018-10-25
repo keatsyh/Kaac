@@ -25,10 +25,12 @@ android {
 }
 
 dependencies {
-//    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.6'
-//    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.6'
-//    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.6'
-//    implementation 'com.github.keatsyh.Kaac:kaac:0.1.6'
+    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.6'
+    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.6'
+    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.6'
+    implementation 'com.github.keatsyh.Kaac:kaac:0.1.6'
+
+
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
     implementation project(':kaac-annotation')
     implementation project(':kaac')

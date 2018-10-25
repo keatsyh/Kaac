@@ -29,7 +29,7 @@ class PermissionActivity : AppCompatActivity() {
 
     companion object {
         private lateinit var iPermission: IPermission
-        private var permissionBeanQueue: Queue<PermissionBean> = PriorityQueue()
+        private var permissionBeanQueue: Queue<PermissionBean> = ArrayDeque()
         fun requestPermissions(context: Context, isFirst: Boolean, permissions: Array<out String>, requestCode: Int, iPermission: IPermission) {
             Companion.iPermission = iPermission
             if (isFirst) {
@@ -46,11 +46,7 @@ class PermissionActivity : AppCompatActivity() {
                 val permissionBean = PermissionBean(requestCode, permissions, iPermission)
                 permissionBeanQueue.add(permissionBean)
             }
-
-
         }
-
-
     }
 
 
@@ -102,6 +98,16 @@ class PermissionActivity : AppCompatActivity() {
         val verifyPermissions = verifyPermissions(*grantResults)
         if (verifyPermissions) {
             iPermission.permissionPass(this)
+            val permissionBean = permissionBeanQueue.poll()
+            Log.d("PermissionActivity","verifyPermissions  $permissionBean")
+            if (permissionBean != null) {
+                if (hasPermission(*permissionBean.permissions)) {
+
+                } else {
+                    Log.d("PermissionActivity","verifyPermissions")
+                    ActivityCompat.requestPermissions(this, permissionBean.permissions, permissionBean.requestCode)
+                }
+            }
         } else {
             val rationale = requestPermissionRationale(permissions)
             if (rationale.first.isNotEmpty()) {
@@ -111,6 +117,17 @@ class PermissionActivity : AppCompatActivity() {
             if (rationale.second.isNotEmpty()) {
                 val prohibitBean = ProhibitBean(rationale.second)
                 iPermission.permissionProhibit(this, prohibitBean)
+            }
+
+            val permissionBean = permissionBeanQueue.poll()
+            Log.d("PermissionActivity","not verifyPermissions  $permissionBean")
+            if (permissionBean != null) {
+                if (hasPermission(*permissionBean.permissions)) {
+
+                } else {
+                    Log.d("PermissionActivity","not verifyPermissions")
+                    ActivityCompat.requestPermissions(this, permissionBean.permissions, permissionBean.requestCode)
+                }
             }
         }
     }
