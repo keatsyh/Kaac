@@ -5,12 +5,13 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='keatsyh@gmail.com'
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'com.squareup:kotlinpoet:1.0.0-RC1'
     compileOnly 'com.google.auto.service:auto-service:1.0-rc4'
-//    kapt "com.google.auto.service:auto-service:1.0-rc4"
-    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.7'
+    kapt "com.google.auto.service:auto-service:1.0-rc4"
+    compileOnly 'com.github.keatsyh.Kaac:kaac-annotation:0.1.8'
+//    compileOnly project(':kaac-annotation')
 }
 
 

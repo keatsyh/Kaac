@@ -6,6 +6,9 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'android-aspectjx'
 
+apply plugin: 'kotlin-kapt'
+
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -22,19 +25,28 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    kapt {
+        arguments {
+            arg("kaacName", project.getName())
+        }
+    }
 }
 
 dependencies {
-    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.6'
-    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.6'
-    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.6'
-    implementation 'com.github.keatsyh.Kaac:kaac:0.1.6'
+//    kapt 'com.github.keatsyh.Kaac:kaac-compiler:0.1.8'
+//    implementation 'com.github.keatsyh.Kaac:kaac-annotation:0.1.8'
+//    implementation 'com.github.keatsyh.Kaac:kaac-aspect:0.1.8'
+//    implementation 'com.github.keatsyh.Kaac:kaac:0.1.8'
+
+    kapt "android.arch.persistence.room:compiler:1.1.1"
 
 
     implementation 'com.android.support:appcompat-v7:28.0.0-alpha3'
-    implementation project(':kaac-annotation')
+//    implementation project(':kaac-annotation')
     implementation project(':kaac')
     implementation project(':kaac-aspect')
+    kapt project(':kaac-compiler')
 
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
