@@ -7,7 +7,6 @@ import android.support.v4.content.ContextCompat
 import android.support.v4.util.ArrayMap
 import android.content.pm.PackageManager
 import android.support.v4.app.ActivityCompat
-import android.util.Log
 
 
 val MIN_SDK_PERMISSIONS = ArrayMap<String, Int>()
