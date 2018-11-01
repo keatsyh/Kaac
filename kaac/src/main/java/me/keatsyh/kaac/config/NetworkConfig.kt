@@ -5,6 +5,8 @@ import me.keatsyh.RxLiveCallAdapterFactory
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
+import retrofit2.CallAdapter
+import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import java.util.concurrent.TimeUnit
@@ -59,6 +61,16 @@ class NetworkConfig {
 
         fun addNetworkInterceptor(interceptor: Interceptor): Builder {
             okBuilder.addNetworkInterceptor(interceptor)
+            return this
+        }
+
+        fun addConverterFactory(converter: Converter.Factory): Builder {
+            reBuilder.addConverterFactory(converter)
+            return this
+        }
+
+        fun addCallAdapterFactory(callAdapter: CallAdapter.Factory): Builder {
+            reBuilder.addCallAdapterFactory(callAdapter)
             return this
         }
 
