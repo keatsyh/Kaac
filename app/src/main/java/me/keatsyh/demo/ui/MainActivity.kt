@@ -1,15 +1,11 @@
-package me.keatsyh.demo
+package me.keatsyh.demo.ui
 
-import android.Manifest.permission.CAMERA
-import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
-import android.support.v7.app.AlertDialog
-import android.util.Log
 import me.keatsyh.annotation.*
+import me.keatsyh.demo.R
+import me.keatsyh.demo.vm.TestVM
 import me.keatsyh.kaac.extended.getKaac
-import me.keatsyh.kaac.extended.toSetting
 import me.keatsyh.kaac.layout.KActivity
 import timber.log.Timber
-import toast
 
 class MainActivity : KActivity() {
 

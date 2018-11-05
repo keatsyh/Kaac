@@ -80,11 +80,13 @@ class BindVMProcessor : KaacProcessor() {
                         .addParameter("instance", Any::class)
 
                 elements.forEach {
+                    logger.w("BindVmHAHA:  "+it.asType().asTypeName())
                     val bindVM = it.getAnnotation(BindVM::class.java)
-                    injectFunSpecBuild.addStatement("(instance as %T).%L = getKaac().viewModelFactory.create(%L::class.java)",
+
+                    injectFunSpecBuild.addStatement("(instance as %T).%L = getKaac().viewModelFactory.create(%T::class.java)",
                             enclosing.asType().asTypeName(),
                             it.simpleName,
-                            bindVM.name)
+                            it.asType().asTypeName())
                 }
 
                 val bindVMClassSpec = TypeSpec.classBuilder(fileNameOfSimpleName(enclosing.simpleName.toString()))
@@ -123,10 +125,10 @@ class BindRepoProcessor : KaacProcessor() {
 //                     val element = it as VariableElement
                     logger.w("RepoName: $enclosing ${it.simpleName}")
                     val bindVM = it.getAnnotation(BindRepo::class.java)
-                    injectFunSpecBuild.addStatement("(instance as %T).%L = %L()",
+                    injectFunSpecBuild.addStatement("(instance as %T).%L = %T()",
                             enclosing.asType().asTypeName(),
                             it.simpleName,
-                            bindVM.name)
+                            it.asType().asTypeName())
                 }
 
                 val bindVMClassSpec = TypeSpec.classBuilder(fileNameOfSimpleName(enclosing.simpleName.toString(),"BindRepo"))

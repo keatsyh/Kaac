@@ -2,6 +2,7 @@ package me.keatsyh.demo;
 
 
 import me.keatsyh.annotation.BindVM;
+import me.keatsyh.demo.vm.TestVM;
 import me.keatsyh.kaac.layout.KActivity;
 import timber.log.Timber;
 

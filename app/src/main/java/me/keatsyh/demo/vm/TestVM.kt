@@ -1,7 +1,8 @@
-package me.keatsyh.demo
+package me.keatsyh.demo.vm
 
 import android.app.Application
 import me.keatsyh.annotation.BindRepo
+import me.keatsyh.demo.TestRepo
 
 import me.keatsyh.kaac.arc.KRepository
 import me.keatsyh.kaac.arc.KViewModel
