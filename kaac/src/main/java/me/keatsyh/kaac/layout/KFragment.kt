@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 
 
-open class KFragment : Fragment() {
+abstract class KFragment : Fragment() {
 
     lateinit var ca: KActivity
 
@@ -22,8 +22,17 @@ open class KFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         ca = activity as KActivity
-
-        return super.onCreateView(inflater, container, savedInstanceState)
+        val rootView = inflater.inflate(asbLayoutId(), container, false)
+        createViewModel(rootView)
+        return rootView
 
     }
+
+    abstract fun createViewModel(view: View)
+
+    abstract fun asbLayoutId(): Int
+
+
+
+
 }

@@ -18,7 +18,6 @@ class NetworkConfig {
     val apiList: MutableList<Any> = ArrayList()
 
     companion object {
-
         fun init(): NetworkConfig {
             return NetworkConfig()
         }
